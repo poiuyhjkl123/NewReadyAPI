@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase id="4dff4e19-3562-40c1-9f0b-c2b2fbab06d6" discardOkResults="false" failOnError="true" failTestCaseOnErrors="true" keepSession="false" name="Test Case 1" searchProperties="true" timeout="0" xmlns:con="http://eviware.com/soapui/config">
+  <con:settings>
+    <con:setting id="4dff4e19-3562-40c1-9f0b-c2b2fbab06d6fileName">Test-Case-1</con:setting>
+  </con:settings>
+  <con:testStep type="httprequest" name="HTTP Request" id="42b3d07a-9366-47ed-ac11-56e60381ef4b">
+    <con:settings/>
+    <con:config method="POST" xsi:type="con:HttpRequest" id="5edff1fc-d847-4f8a-af2c-a79c55098e0d" name="HTTP Request" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <con:settings>
+        <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+      </con:settings>
+      <con:endpoint>https://www.smashingmagazine.com/2017/05/long-scrolling</con:endpoint>
+      <con:request/>
+      <con:credentials>
+        <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+        <con:authType>No Authorization</con:authType>
+      </con:credentials>
+      <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+      <con:parameters/>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="groovy" name="Groovy Script" id="cb51acbc-8770-4acf-9268-89c3c8a8333a">
+    <con:settings/>
+    <con:config>
+      <script>def request = context.expand( '${HTTP Request#Request}' )
+import Callee
+// Call the class from the library and post the returned information to the log.
+c = new Callee()
+log.info c.hello()
+
+def rawRequest = context.expand( '${HTTP Request#RawRequest}' )
+def request = context.expand( '${HTTP Request#Request}' )</script>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="properties" name="Properties" id="74a03433-d80a-4d6d-92b3-59ca5958c7af">
+    <con:settings/>
+    <con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <con:properties>
+        <con:property>
+          <con:name>test</con:name>
+          <con:value/>
+        </con:property>
+      </con:properties>
+    </con:config>
+  </con:testStep>
+  <con:properties/>
+  <con:reportParameters/>
+</con:testCase>
